@@ -22,6 +22,7 @@ if auth_type == 'auth':
 if auth_type == 'basic_auth':
     auth = BasicAuth()
 
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
@@ -45,7 +46,7 @@ def forbidden(error) -> str:
 
 @app.before_request
 def authenticate_user():
-    """User Authentication before request.
+    """User Authentication before a request.
     """
     if auth:
         excluded_paths = [
