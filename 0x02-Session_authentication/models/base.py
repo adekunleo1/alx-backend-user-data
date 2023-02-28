@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Base module
 """
+
 from datetime import datetime
 from typing import TypeVar, List, Iterable
 from os import path
@@ -17,7 +18,7 @@ class Base():
     """
 
     def __init__(self, *args: list, **kwargs: dict):
-        """ Initialize a Base instance
+        """ Base Instance Initialization
         """
         s_class = str(self.__class__.__name__)
         if DATA.get(s_class) is None:
@@ -45,7 +46,7 @@ class Base():
         return (self.id == other.id)
 
     def to_json(self, for_serialization: bool = False) -> dict:
-        """ Convert the object a JSON dictionary
+        """ Convert the object to a JSON dictionary
         """
         result = {}
         for key, value in self.__dict__.items():

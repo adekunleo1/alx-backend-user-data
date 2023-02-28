@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
 """ User Session Class
 """
+
 from models.base import Base
 
 
@@ -8,7 +10,7 @@ class UserSession(Base):
     """
 
     def __init__(self, *args: list, **kwargs: dict):
-        """ Initializes a User Session Class instance.
+        """ User Session Class instance Initialization.
         """
         super().__init__(*args, **kwargs)
         self.user_id = kwargs.get('user_id')
