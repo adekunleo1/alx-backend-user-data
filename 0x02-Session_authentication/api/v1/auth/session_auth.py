@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""authentication session module API.
+""" Session authentication module for the API.
 """
 from uuid import uuid4
 from flask import request
@@ -9,12 +9,12 @@ from models.user import User
 
 
 class SessionAuth(Auth):
-    """authentication session class
+    """ Session authentication class.
     """
     user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:
-        """user session id
+        """Creates a session id for the user.
         """
         if type(user_id) is str:
             session_id = str(uuid4())
@@ -22,19 +22,20 @@ class SessionAuth(Auth):
             return session_id
 
     def user_id_for_session_id(self, session_id: str = None) -> str:
-        """gets user id session
+        """Retrieves the user id of the user associated with
+        a given session id.
         """
         if type(session_id) is str:
             return self.user_id_by_session_id.get(session_id)
 
     def current_user(self, request=None) -> User:
-        """current user request
+        """Retrieves the user associated with the request.
         """
         user_id = self.user_id_for_session_id(self.session_cookie(request))
         return User.get(user_id)
 
     def destroy_session(self, request=None):
-        """destroy authenticated session
+        """Destroys an authenticated session.
         """
         session_id = self.session_cookie(request)
         user_id = self.user_id_for_session_id(session_id)

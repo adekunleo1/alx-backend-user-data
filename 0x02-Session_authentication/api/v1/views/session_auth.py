@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""session authentication views
+""" Session Authentication Views Module
 """
+
 import os
 from typing import Tuple
 from flask import abort, jsonify, request
@@ -11,15 +12,17 @@ from api.v1.views import app_views
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login() -> Tuple[str, int]:
+    """ POST /api/v1/auth_session/login
+    Return:
+      - JSON representation of a User object.
     """
-    """
-    not_found_res = {"error": "no user found for this email"}
+    not_found_res = {"error": "user email not found"}
     email = request.form.get('email')
     if email is None or len(email.strip()) == 0:
-        return jsonify({"error": "email missing"}), 400
+        return jsonify({"error": "invalid email"}), 400
     password = request.form.get('password')
     if password is None or len(password.strip()) == 0:
-        return jsonify({"error": "password missing"}), 400
+        return jsonify({"error": "invalid password"}), 400
     try:
         users = User.search({'email': email})
     except Exception:
